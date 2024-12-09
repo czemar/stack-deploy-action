@@ -58,6 +58,7 @@ docker context use remote
 
 if [ -n "${INPUT_ENV_FILE}" ];then
     echo -e "\u001b[36mSourcing Environment File: ${INPUT_ENV_FILE}"
+    pwd
     ls -la
     stat "${INPUT_ENV_FILE}"
     set -a
