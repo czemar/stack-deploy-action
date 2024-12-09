@@ -68,5 +68,14 @@ if [ -n "${INPUT_ENV_FILE}" ];then
     # export ENV_FILE="${INPUT_ENV_FILE}"
 fi
 
+if [ -n "${INPUT_ENV}" ];then
+    echo -e "\u001b[36mSetting Environment Variables"
+    echo "${INPUT_ENV}" > /tmp/env
+    stat /tmp/env
+    set -a
+    # shellcheck disable=SC1090
+    source /tmp/env
+fi
+
 echo -e "\u001b[36mDeploying Stack: \u001b[37;1m${INPUT_NAME}"
 docker stack deploy -c "${INPUT_FILE}" "${INPUT_NAME}"

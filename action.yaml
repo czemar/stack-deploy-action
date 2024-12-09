@@ -32,6 +32,9 @@ inputs:
   env_file:
     description: "Environment File"
     required: false
+  env:
+    description: "Environment Variables"
+    required: false
 
 runs:
   using: "docker"
