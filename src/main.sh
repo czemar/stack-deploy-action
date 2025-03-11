@@ -7,9 +7,6 @@ echo "Running: ${0} as: $(whoami) in: $(pwd)"
 echo "Repository files:"
 ls -la /github/workspace
 
-echo "Repository files are available in: $1"
-ls -la "$1"
-
 function cleanup_trap() {
     _ST="$?"
     if [[ "${_ST}" != "0" ]]; then
