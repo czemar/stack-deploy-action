@@ -44,7 +44,7 @@ fi
 trap cleanup_trap EXIT HUP INT QUIT PIPE TERM
 
 echo -e "\u001b[36mVerifying Docker and Setting Context."
-ssh -p "${INPUT_PORT}" "${INPUT_USER}@${INPUT_HOST}" "docker info" > /dev/null
+ssh -p "${INPUT_PORT}" "${INPUT_USER}@${INPUT_HOST}" "docker info" || echo "Error: Unable to retrieve Docker info"
 
 if [ -n "$(docker context ls --format '{{.Name}}' | grep remote)" ];then
     echo -e "\u001b[36mDocker Context Exists: remote"
