@@ -28,6 +28,8 @@ echo -e "\u001b[36mSetting Permissions on ssh directory"
 chmod 0700 /root/.ssh
 
 echo -e "\u001b[36mAdding Host to known_hosts"
+echo "Port: ${INPUT_PORT} Host: ${INPUT_HOST}"
+
 ssh-keyscan -p "${INPUT_PORT}" -H "${INPUT_HOST}" >> /root/.ssh/known_hosts
 
 echo -e "\u001b[36mChecking for SSH Key or Password"
