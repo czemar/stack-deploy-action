@@ -20,9 +20,13 @@ function cleanup_trap() {
     exit "${_ST}"
 }
 
+echo -e "\u001b[36mCreating ssh directory and adding host to known_hosts"
+
 mkdir -p /root/.ssh
 chmod 0700 /root/.ssh
 ssh-keyscan -p "${INPUT_PORT}" -H "${INPUT_HOST}" >> /root/.ssh/known_hosts
+
+echo -e "\u001b[36mChecking for SSH Key or Password"
 
 if [ -z "${INPUT_SSH_KEY}" ];then
     echo -e "\u001b[36mCreating and Copying SSH Key to: ${INPUT_HOST}"
@@ -41,6 +45,8 @@ else
     ssh-add /root/.ssh/id_rsa
 fi
 
+echo -e "\u001b[36mSetting up Trap for Cleanup"
+
 trap cleanup_trap EXIT HUP INT QUIT PIPE TERM
 
 echo -e "\u001b[36mVerifying Docker and Setting Context."
@@ -52,9 +58,13 @@ if [ -n "$(docker context ls --format '{{.Name}}' | grep remote)" ];then
     docker context rm remote --force
 fi
 
+echo -e "\u001b[36mCreating Docker Context: remote"
+
 docker context create remote --docker "host=ssh://${INPUT_USER}@${INPUT_HOST}:${INPUT_PORT}"
 docker context ls
 docker context use remote
+
+echo -e "\u001b[36mCopying Docker Compose File to Remote Host: ${INPUT_HOST}"
 
 if [ -n "${INPUT_ENV_FILE}" ];then
     echo -e "\u001b[36mSourcing Environment File: ${INPUT_ENV_FILE}"
