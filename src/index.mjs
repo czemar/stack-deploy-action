@@ -1,4 +1,4 @@
-import { $, chalk } from "zx";
+import { $, chalk } from "npm:zx";
 
 // Print script information
 console.log(chalk.blue(`Current directory: ${process.cwd()}`));
