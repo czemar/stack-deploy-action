@@ -39,7 +39,7 @@ console.log(chalk.cyan(`Adding host ${INPUT_HOST} to known_hosts...`));
 await $`ssh-keyscan -p ${INPUT_PORT} -H ${INPUT_HOST} >> /root/.ssh/known_hosts`;
 
 console.log(chalk.cyan("Using provided SSH key..."));
-await $`eval "$(ssh-agent -s)"`;
+await $`eval \`ssh-agent -s\``;
 await $`ssh-add /root/.ssh/id_rsa`;
 
 // Check Docker status
