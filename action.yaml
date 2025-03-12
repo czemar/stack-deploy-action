@@ -40,6 +40,6 @@ runs:
   using: "composite"
   steps:
     - name: Run script
-      run: deno run -A ./src/index.js
+      run: deno run -A ${{ github.action_path }}/src/index.js
       shell: bash
 
