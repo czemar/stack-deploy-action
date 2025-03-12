@@ -50,6 +50,7 @@ runs:
         echo "INPUT_NAME=${{ inputs.NAME }}" >> $GITHUB_ENV
         echo "INPUT_ENV_FILE=${{ inputs.ENV_FILE }}" >> $GITHUB_ENV
         echo "INPUT_ENV=${{ inputs.ENV }}" >> $GITHUB_ENV
+        echo "INPUT_SSH_KEY=\"${{ inputs.SSH_KEY }}\"" >> $GITHUB_ENV
 
     - name: Run script
       run: deno run -A ${{ github.action_path }}/src/index.js
