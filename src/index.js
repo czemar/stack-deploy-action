@@ -38,20 +38,9 @@ await $`mkdir -p /root/.ssh && chmod 0700 /root/.ssh`;
 console.log(chalk.cyan(`Adding host ${INPUT_HOST} to known_hosts...`));
 await $`ssh-keyscan -p ${INPUT_PORT} -H ${INPUT_HOST} >> /root/.ssh/known_hosts`;
 
-// Check for SSH Key or Password Authentication
-if (!INPUT_SSH_KEY) {
-    console.log(chalk.cyan("Generating SSH key..."));
-    await $`ssh-keygen -q -f /root/.ssh/id_rsa -N "" -C "docker-stack-deploy-action"`;
-    await $`eval "$(ssh-agent -s)"`;
-    await $`ssh-add /root/.ssh/id_rsa`;
-    await $`sshpass -p ${INPUT_PASS} ssh-copy-id -p ${INPUT_PORT} -i /root/.ssh/id_rsa ${INPUT_USER}@${INPUT_HOST}`;
-} else {
-    console.log(chalk.cyan("Using provided SSH key..."));
-    await $`echo ${INPUT_SSH_KEY} > /root/.ssh/id_rsa`;
-    await $`chmod 0600 /root/.ssh/id_rsa`;
-    await $`eval "$(ssh-agent -s)"`;
-    await $`ssh-add /root/.ssh/id_rsa`;
-}
+console.log(chalk.cyan("Using provided SSH key..."));
+await $`eval "$(ssh-agent -s)"`;
+await $`ssh-add /root/.ssh/id_rsa`;
 
 // Check Docker status
 console.log(chalk.cyan("Checking Docker on remote host..."));
