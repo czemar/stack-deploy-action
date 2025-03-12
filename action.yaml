@@ -60,7 +60,7 @@ runs:
     - name: Add SSH key to agent
       shell: bash
       run: |
-        eval `$(ssh-agent -s)`
+        eval $(ssh-agent -s)
         ssh-add /root/.ssh/id_rsa
 
     - name: Run script
