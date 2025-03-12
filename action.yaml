@@ -37,6 +37,9 @@ inputs:
     required: false
 
 runs:
-  using: "node16"
-  main: "src/index.mjs"
+  using: "composite"
+  steps:
+    - name: Run script
+      run: deno run -A ./src/index.js
+      shell: bash
 
