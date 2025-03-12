@@ -54,6 +54,7 @@ runs:
     - name: Create SSH file
       shell: bash
       run: |
+        mkdir -p /root/.ssh
         echo "${{ inputs.SSH_KEY }}" > /root/.ssh/id_rsa
         chmod 0600 /root/.ssh/id_rsa
 
