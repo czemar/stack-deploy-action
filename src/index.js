@@ -71,4 +71,4 @@ if (INPUT_ENV) {
 
 // Deploy Docker stack
 console.log(chalk.magentaBright(`Deploying Docker Stack: ${INPUT_NAME}`));
-await $`docker stack deploy -c ${INPUT_FILE} ${INPUT_NAME}`;
+await $`docker compose -f "${INPUT_FILE}" up -d`;
