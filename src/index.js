@@ -1,4 +1,6 @@
 import { $ } from "npm:zx";
 
 // List repository files
-await $`ls -la`;
+const dir = await $`ls -la`;
+
+console.log(dir);
