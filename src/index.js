@@ -53,7 +53,7 @@ if (existingContext) {
     await $`docker context rm remote --force`;
 }
 
-console.log(chalk.cyan("Creating Docker context..."));
+console.log(chalk.cyan("Creating Docker context...", "host=ssh://${INPUT_USER}@${INPUT_HOST}:${INPUT_PORT}"));
 await $`docker context create remote --docker "host=ssh://${INPUT_USER}@${INPUT_HOST}:${INPUT_PORT}"`;
 await $`docker context use remote`;
 
