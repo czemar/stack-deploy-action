@@ -38,10 +38,6 @@ await $`mkdir -p /root/.ssh && chmod 0700 /root/.ssh`;
 console.log(chalk.cyan(`Adding host ${INPUT_HOST} to known_hosts...`));
 await $`ssh-keyscan -p ${INPUT_PORT} -H ${INPUT_HOST} >> /root/.ssh/known_hosts`;
 
-console.log(chalk.cyan("Using provided SSH key..."));
-await $`eval \`ssh-agent -s\``;
-await $`ssh-add /root/.ssh/id_rsa`;
-
 // Check Docker status
 console.log(chalk.cyan("Checking Docker on remote host..."));
 await $`ssh -p ${INPUT_PORT} ${INPUT_USER}@${INPUT_HOST} "docker info"`.catch(() =>

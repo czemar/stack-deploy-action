@@ -57,6 +57,12 @@ runs:
         echo "${{ inputs.SSH_KEY }}" > /root/.ssh/id_rsa
         chmod 0600 /root/.ssh/id_rsa
 
+    - name: Add SSH key to agent
+      shell: bash
+      run: |
+        eval `$(ssh-agent -s)`
+        ssh-add /root/.ssh/id_rsa
+
     - name: Run script
       shell: bash
       run: deno run -A ${{ github.action_path }}/src/index.js
