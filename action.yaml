@@ -37,22 +37,6 @@ inputs:
     required: false
 
 runs:
-  using: "composite"
-  steps:
-    - name: Set Environment Variables
-      shell: bash
-      run: |
-        echo "INPUT_HOST=${{ inputs.HOST }}" >> $GITHUB_ENV
-        echo "INPUT_PORT=${{ inputs.PORT }}" >> $GITHUB_ENV
-        echo "INPUT_USER=${{ inputs.USER }}" >> $GITHUB_ENV
-        echo "INPUT_PASS=${{ inputs.PASS }}" >> $GITHUB_ENV
-        echo "INPUT_SSH_KEY=${{ inputs.SSH_KEY }}" >> $GITHUB_ENV
-        echo "INPUT_FILE=${{ inputs.FILE }}" >> $GITHUB_ENV
-        echo "INPUT_NAME=${{ inputs.NAME }}" >> $GITHUB_ENV
-        echo "INPUT_ENV_FILE=${{ inputs.ENV_FILE }}" >> $GITHUB_ENV
-        echo "INPUT_ENV=${{ inputs.ENV }}" >> $GITHUB_ENV
-
-    - name: Run script
-      run: deno run -A ${{ github.action_path }}/src/index.js
-      shell: bash
+  using: "node16"
+  main: "src/index.js"
 
